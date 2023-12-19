@@ -32,17 +32,16 @@ categories = {
 def update_dictionary(amount, dictionary):
     names = list(dictionary)
     
-    txt = "\nChoose expense category:\n\n"
+    txt = "\nChoose category:\n\n"
     for item in names:
         txt += str(names.index(item) + 1) + ": " + item + "\n"
 
     category = input(txt + "\n") 
 
-    dictionary[names[int(category) - 1]] += int(amount)
+    dictionary[names[int(category) - 1]] += float(amount)
 
-    output = "\nReported value is {total:.2f} dollars from {source}."
-    print(output.format(total = int(amount), source = names[int(category) - 1]))
-    print(dictionary)
+    output = "\nReported value is ${total:.2f} dollars from {source}."
+    print(output.format(total = float(amount), source = names[int(category) - 1]))
 
 
 menu = """\nSelect one of the following option numbers:
@@ -52,9 +51,8 @@ menu = """\nSelect one of the following option numbers:
 3: Modify Budget Item
 4. View Expense Type Totals
 5. View Monthly Expenses By Expense Type
-6. Add Expense Category
-7. View Month By Expense Category
-8. Quit
+6. View Month By Expense Category
+7. Quit
 
 """
 
@@ -67,15 +65,19 @@ while waiting_for_input == True:
     if (selection == "1"):
         amount = input("\nWhat is the income amount: ")
         update_dictionary(amount, income)
+        print("Summary of income sources:\n")
+        print(income)
 
-    if (selection =="2"):
+
+    if (selection == "2"):
         amount = input("\nWhat is the expense amount: ")
         update_dictionary(amount, expense)
-
-    if (selection == "6"):
-        amount = input("\nWhat is the expense amount: ")
         update_dictionary(amount, categories)
+        print("\nSummary of expense sources:\n")
+        print(expense)
+        print("\nList of categorical expenses:\n")
+        print(categories)
 
-    if (selection == "8"):
+    if (selection == "7"):
         waiting_for_input = False
 
